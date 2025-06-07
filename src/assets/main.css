@@ -1,0 +1,75 @@
+:root {
+
+/* --highlight-color-left: #00BCD4;
+--background-color-left: #E0F7FA;
+--text-color-left: #263238;
+--highlight-color-right: #FF5722;
+--background-color-right: #FFFFFF;
+--text-color-right: #424242; */
+  --color-green: green;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.dates {
+  opacity: 0.55;
+  font-size: 0.83rem;
+}
+
+[contenteditable="true"] {
+  border-radius: 2px;
+  background-color: rgba(178, 190, 181, 0.44);
+  padding: 2px;
+}
+
+.custom-input {
+  padding: 6px 12px;
+  border-color: #fff;
+  border: #ced4da;
+  color: #495057;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+}
+
+input:focus {
+  outline-color: #ffb347;
+  border-color: #ffb347;
+}
+
+.sidebar-selection {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 15px 10px 15px 10px;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+}
+
+.sidebar-title {
+    margin-bottom: 15px;
+    font-weight: 600;
+    
+}
+
+.sidebar label {
+    margin-bottom: 10px;
+    
+}
