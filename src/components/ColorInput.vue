@@ -1,6 +1,6 @@
 <template>
     <label>
-        <input class="color-picker" type="color" @input="$emit('colorChanged', $event.target.value)" :value="defaultColor">
+        <input class="color-picker" type="color" @blur="$emit('colorChanged', $event.target.value)" :value="defaultColor">
         {{ label }}
     </label>
 </template>

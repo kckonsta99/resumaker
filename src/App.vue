@@ -41,7 +41,7 @@
 
             <SectionHeadline :headline="headlines[0]" @headline-edited="updateHeadline($event, 0)" :editing="editing" />
 
-            <div :contenteditable="editing" @input="updateProperty($event, 'introText')">
+            <div :contenteditable="editing" @blur="updateProperty($event, 'introText')">
               {{ introText }}
             </div>
           </ResumeSection>
@@ -54,7 +54,7 @@
           <ResumeSection>
             <SectionHeadline :headline="headlines[2]" @headline-edited="updateHeadline($event, 2)" :editing="editing" />
             <ul>
-              <li v-for="(skill, index) in skills" :key="index" :contenteditable="editing" @input="updateNestedProperty($event, 'skills', index)">{{ skill }}</li>
+              <li v-for="(skill, index) in skills" :key="index" :contenteditable="editing" @blur="updateNestedProperty($event, 'skills', index)">{{ skill }}</li>
             </ul>
             <EditButtons @add-click="skills.push('new entry')" @remove-click="skills.pop()" :show-remove-btn="skills.length > 0"/>
           </ResumeSection>
@@ -62,7 +62,7 @@
           <ResumeSection>
             <SectionHeadline :headline="headlines[3]" @headline-edited="updateHeadline($event, 3)" :editing="editing" />
             <ul >
-              <li v-for="(hightlight, HighIndex) in hightlights" :key="HighIndex" :contenteditable="editing" @input="updateNestedProperty($event, 'hightlights', HighIndex)">{{ hightlight }}</li>
+              <li v-for="(hightlight, HighIndex) in hightlights" :key="HighIndex" :contenteditable="editing" @blur="updateNestedProperty($event, 'hightlights', HighIndex)">{{ hightlight }}</li>
             </ul>
             <EditButtons @add-click="hightlights.push('new entry')" @remove-click="hightlights.pop()" :show-remove-btn="hightlights.length > 0"/>    
           </ResumeSection>  
@@ -70,10 +70,10 @@
         </div>
         
         <div class="right-col">
-          <div class="rersonal-name" :contenteditable="editing" @input="updateProperty($event, 'name')">
+          <div class="rersonal-name" :contenteditable="editing" @blur="updateProperty($event, 'name')">
             {{ name }}
           </div>
-          <div class="personal-title" :contenteditable="editing" @input="updateProperty($event, 'title')">
+          <div class="personal-title" :contenteditable="editing" @blur="updateProperty($event, 'title')">
             {{ title }}
           </div>
 
@@ -82,22 +82,26 @@
               <SectionHeadline :headline="headlines[4]" @headline-edited="updateHeadline($event, 4)" :editing="editing" />
               <EditButtons text-add="Add experience" :show-remove-btn="false" @add-click="addExperience"/>
             </div>
-            
+
+
 
             <div v-for="(item, index) in experience" :key="index" class="inner-section">
               <div class="d-flex justify-content-between">
-                <div :contenteditable="editing" class="item-title" @input="updateExperience($event, 'title', index)">{{ item.title }}</div>
+                <div :contenteditable="editing" class="item-title" @blur="updateExperience($event, 'title', index)">{{ item.title }}</div>
+
+
+
                 <EditButtons @remove-click="removeExperience(index)" :show-add-btn="false"/>
               </div>
               <div class="d-flex justify-content-between">
                 <div class="details-format">
-                  <span :contenteditable="editing" @input="updateExperience($event, 'company', index)">{{ item.company }}</span>, 
-                  <span :contenteditable="editing" @input="updateExperience($event, 'location', index)">{{ item.location }}</span>
+                  <span :contenteditable="editing" @blur="updateExperience($event, 'company', index)">{{ item.company }}</span>, 
+                  <span :contenteditable="editing" @blur="updateExperience($event, 'location', index)">{{ item.location }}</span>
                 </div>
-                <div class="dates" :contenteditable="editing" @input="updateExperience($event, 'date', index)">{{ item.date }}</div>
+                <div class="dates" :contenteditable="editing" @blur="updateExperience($event, 'date', index)">{{ item.date }}</div>
               </div>
               <ul>
-                <li class="desc-format" v-for="(desc, DescIndex) in item.description" :key="DescIndex" :contenteditable="editing" @input="updateExperienceDescription($event, index, DescIndex)"> {{ desc }}</li>
+                <li class="desc-format" v-for="(desc, DescIndex) in item.description" :key="DescIndex" :contenteditable="editing" @blur="updateExperienceDescription($event, index, DescIndex)"> {{ desc }}</li>
               </ul>
               <EditButtons @add-click="item.description.push('new entry')" @remove-click="item.description.pop()" :show-remove-btn="item.description.length > 0"/>
             </div>
@@ -113,18 +117,18 @@
 
             <div v-for="(item, index) in education" :key="index" class="inner-section">
               <div class="d-flex justify-content-between">
-                <div :contenteditable="editing" class="item-title" @input="updateEducation($event, 'title', index)">{{ item.title }}</div>
+                <div :contenteditable="editing" dir="ltr" class="item-title" @blur="updateEducation($event, 'title', index)">{{ item.title }}</div>
                 <EditButtons @remove-click="removeEducation(index)" :show-add-btn="false"/>
               </div>
               <div class="d-flex justify-content-between">
                 <div class="details-format">
-                  <span :contenteditable="editing" @input="updateEducation($event, 'university', index)">{{ item.university }}</span>,
-                  <span :contenteditable="editing" @input="updateEducation($event, 'location', index)">{{ item.location }}</span>
+                  <span :contenteditable="editing" @blur="updateEducation($event, 'university', index)">{{ item.university }}</span>,
+                  <span :contenteditable="editing" @blur="updateEducation($event, 'location', index)">{{ item.location }}</span>
                 </div>
-                <div class="dates" :contenteditable="editing" @input="updateEducation($event, 'date', index)">{{ item.date }}</div>
+                <div class="dates" :contenteditable="editing" @blur="updateEducation($event, 'date', index)">{{ item.date }}</div>
               </div>
               <ul>
-                <li class="desc-format" v-for="(desc, DescIndex) in item.description" :key="DescIndex" :contenteditable="editing" @input="updateEducationDescription($event, index, DescIndex)">{{ desc }}</li>
+                <li class="desc-format" v-for="(desc, DescIndex) in item.description" :key="DescIndex" :contenteditable="editing" @blur="updateEducationDescription($event, index, DescIndex)">{{ desc }}</li>
               </ul>
               <EditButtons @add-click="item.description.push('new entry')" @remove-click="item.description.pop()" :show-remove-btn="item.description.length > 0"/>
             </div>
@@ -282,7 +286,7 @@
         this.education[index][key] = event.target.innerText;
       },
       updateEducationDescription(event, index1, index2) {
-        this.education[index1]['description'][index2] = event.targer.innerText;
+        this.education[index1]['description'][index2] = event.target.innerText;
       },
       // unshift: array method to insert the new object at the beginning
       addExperience() {
@@ -294,7 +298,7 @@
           description: [
             "description"
           ]
-        })
+        });
       },
       addEducation() {
         this.education.unshift({
@@ -305,7 +309,7 @@
           description: [
             "description"
           ]
-        })
+        });
       },
       removeExperience(index) {
         this.experience.splice(index, 1);
